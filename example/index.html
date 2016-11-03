@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue.js 2 Drag and Drop Example</title>
+	<style>
+		* { margin:0; padding:0; }
+
+		#app { padding:15px; }
+
+		h2 { font-size:18px; font-family:Verdana; margin:15px 0; }
+
+		.list {  }
+		.list li { font-size:14px; font-family:Arial; color:#fff; background-color:#3879d9; padding:7px 20px; border:2px solid transparent; cursor:pointer; }
+		.list li:hover { color:#3879d9; background-color:#fff; border:2px solid #3879d9; }
+
+		.list li.drag-start { background-color:#C56767; }
+		.list li.drag-over { background-color:#67c58f; }
+
+		.empty-container { font-size:0; }
+		.empty-container .column { display:inline-block; vertical-align:top; }
+
+		.empty-container.two-column .column { width:48.5%; margin-right:1.5%; }
+		.empty-container.two-column .column:nth-of-type(2n) { margin-right:0; }
+	</style>
+</head>
+<body>
+
+<div id="app">
+
+	<div class="empty-container two-column">
+
+		<div class="column">
+
+			<h2>Drinks</h2>
+
+			<ul class="list">
+				<li
+					v-for="(drink, drink_index) in drinks"
+					:data-index="drink_index"
+					v-drag-drop="{
+						group: 'drink',
+						drop: {
+							css: 'drop',
+							method: moveDrinkElement
+						}
+					}"
+				>
+					${ drink.name }
+				</li>
+			</ul>
+		</div>
+
+		<div class="column">
+
+			<h2>Games</h2>
+
+			<ul class="list">
+				<li
+					v-for="(game, game_index) in games"
+					:data-index="game_index"
+					v-drag-drop="{
+						group: 'game',
+						drop: {
+							css: 'drop-game'
+						}
+					}"
+				>
+					${ game.name }
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+<!-- Insert Vue Drag Drop directive -->
+<script src="../index.js"></script>
+<script>
+new Vue({
+    el: '#app',
+    delimiters: ['${', '}'],
+    data: {
+    	drinks: [
+    		{ name: 'coke' },
+    		{ name: 'sprite' },
+    		{ name: 'royal' },
+    		{ name: 'root beer' },
+    		{ name: 'pepsi' }
+    	],
+    	games: [
+    		{ name: 'ragnarok' },
+    		{ name: 'gunbound' },
+    		{ name: 'o2jam' },
+    		{ name: 'fairy fencer f' },
+    		{ name: 'wonderland online' }
+    	]
+    },
+    methods: {
+    	moveDrinkElement: function(dragged_element, dropped_element) {
+
+    		var dragged_index  = dragged_element.getAttribute('data-index');
+    		var dropped_index  = dropped_element.getAttribute('data-index');
+
+    		var new_dragged_element = this.drinks[dragged_index];
+    		var new_dropped_element = this.drinks[dropped_index];
+
+    		Vue.set(this.drinks, dropped_index, new_dragged_element);
+            Vue.set(this.drinks, dragged_index, new_dropped_element);
+    	}
+    }
+});
+</script>
+</body>
+</html>

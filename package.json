@@ -1,0 +1,28 @@
+{
+  "name": "vue-drag-drop",
+  "version": "1.0.0",
+  "description": "Vue.js drop and drag plug-in.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wlachenal/vue-drag-drop.git"
+  },
+  "keywords": [
+    "vue",
+    "drag-and-drop",
+    "drag drop"
+  ],
+  "author": {
+    "name": "Wesley Brian Lachenal",
+    "email": "wlachenal@gmail.com",
+    "url": "http://vigilancer.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wlachenal/vue-drag-drop/issues"
+  },
+  "homepage": "https://github.com/wlachenal/vue-drag-drop#readme"
+}
